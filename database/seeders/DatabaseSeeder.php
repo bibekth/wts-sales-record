@@ -2,9 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\Role;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,11 +15,31 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        Role::insert([
+            ['id'=>1,'role'=>'Admin'],
+            ['id'=>2,'role'=>'Client'],
+            ['id'=>3,'role'=>'User'],
+        ]);
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        User::insert([
+            [
+                'name'=>'admin user',
+                'email'=>'admin@gmail.com',
+                'password'=>Hash::make('wts12345'),
+                'role_id'=>1
+            ],
+            [
+                'name'=>'client user',
+                'email'=>'client@gmail.com',
+                'password'=>Hash::make('wts12345'),
+                'role_id'=>2
+            ],
+            [
+                'name'=>'user user',
+                'email'=>'user@gmail.com',
+                'password'=>Hash::make('wts12345'),
+                'role_id'=>3
+            ],
         ]);
     }
 }
